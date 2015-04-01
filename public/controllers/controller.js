@@ -1,9 +1,33 @@
-var printScheduleApp = angular.module('printScheduleApp', [ 'ui.bootstrap.tpls' ]);
+var printScheduleApp = angular.module('printScheduleApp', [ 'ngRoute', 'ui.bootstrap' ]);
+
+//Routes
+printScheduleApp.config(function ($routeProvider) { 
+    
+    $routeProvider
+    	.when('/', {
+            templateUrl: 'views/home.html'
+        })
+        .when('/schedule', {
+            templateUrl: 'views/table.html'
+        })
+        .otherwise( { 
+        	redirecTo: '/'
+        });
+
+});
+
+//NavBarCtrl
+printScheduleApp.controller('NavBarCtrl', function($scope) { 
+	console.log('Hello World from NavBarCtrl');
+	$scope.isCollapsed = true;
+});
+
+//ScheduleCtrl
 printScheduleApp.controller('ScheduleCtrl', ['$scope', '$http', function($scope, $http) {
 
-	console.log('Hello World from controller');
+	console.log('Hello World from ScheduleCtrl');
 	
-	$scope.isUpdateOnTheWay = false;
+	$scope.isUpdateOnTheWay = false;	
 
 	var refresh = function () {
 		$http.get('/contactlist').success(function (response) {

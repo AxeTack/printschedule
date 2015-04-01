@@ -17,10 +17,10 @@ app.use(express.static(__dirname + '/public'));
 // parse application/json 
 app.use(bodyParser.json());
 
+
 // get list DATA
 app.get('/contactlist', function (req, res) {
 	console.log('I resived a GET request');
-
 	db.contactlist.find(function (err, docs) {
 		console.log(docs);
 		res.json(docs);
